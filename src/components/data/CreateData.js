@@ -25,6 +25,8 @@ class CreateData extends Component {
     const { auth, team } = this.props;
     if (!auth.uid) return <Redirect to="/signin" />;
 
+    console.log(this.props);
+
     return (
       <div className="container">
         <form className="white" onSubmit={this.handleSubmit}>

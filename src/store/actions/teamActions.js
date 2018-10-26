@@ -10,14 +10,14 @@ export const createTeam = team => {
     // get collection
     firestore
       .collection('teams')
-      .add({
+      .doc(team.teamName)
+      .set({
         // use data from parameter team (where title is from createTeam component)
         ...team,
         teamOwnerFirstName: profile.firstName,
         teamOwnerLastName: profile.lastName,
         teamOwnerID: teamOwnerId,
-        createdAt: new Date(),
-        teamMembers: [teamOwnerId]
+        createdAt: new Date()
       })
       .then(() => {
         dispatch({ type: 'CREATE_TEAM', team });

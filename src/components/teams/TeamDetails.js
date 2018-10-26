@@ -4,9 +4,10 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
 import CreateData from '../data/CreateData';
+import DataList from '../data/DataList';
 
 const TeamDetails = props => {
-  const { team, auth } = props;
+  const { team, auth, data } = props;
   if (!auth.uid) return <Redirect to="/signin" />;
 
   if (team) {
@@ -24,6 +25,7 @@ const TeamDetails = props => {
         </div>
 
         <CreateData team={team} />
+        <DataList data={data} />
       </div>
     );
   } else {
@@ -44,6 +46,7 @@ const mapStateToProps = (state, ownProps) => {
     // return it in object team. Now available in props.team
     team: team,
     auth: state.firebase.auth
+    /* data: team.tasks */
   };
 };
 

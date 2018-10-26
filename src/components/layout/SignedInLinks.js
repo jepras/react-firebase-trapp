@@ -9,7 +9,7 @@ const SignedInLinks = props => {
     <div>
       <ul className="right">
         <li>
-          <NavLink to="/createdata">New Data</NavLink>
+          <NavLink to="/teams">Teams</NavLink>
         </li>
         <li>
           <NavLink to="/createteam">New Team</NavLink>
