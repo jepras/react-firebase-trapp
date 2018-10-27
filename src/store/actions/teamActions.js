@@ -17,7 +17,8 @@ export const createTeam = team => {
         teamOwnerFirstName: profile.firstName,
         teamOwnerLastName: profile.lastName,
         teamOwnerID: teamOwnerId,
-        createdAt: new Date()
+        createdAt: new Date(),
+        tasks: []
       })
       .then(() => {
         dispatch({ type: 'CREATE_TEAM', team });

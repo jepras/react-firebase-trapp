@@ -18,8 +18,10 @@ class CreateData extends Component {
     e.preventDefault();
     // calls mapDispatchToProp function
     this.props.createData(this.state);
-    // access to browser history through props
-    /*     this.props.history.push('/'); */
+    this.setState({
+      title: '',
+      content: ''
+    });
   };
   render() {
     const { auth, team } = this.props;
@@ -33,7 +35,12 @@ class CreateData extends Component {
           <h5 className="grey-text text-darken-3">Create some data</h5>
 
           <div className="input-field">
-            <input type="text" id="title" onChange={this.handleChange} />
+            <input
+              type="text"
+              id="title"
+              onChange={this.handleChange}
+              value={this.state.title}
+            />
             <label htmlFor="title">Title</label>
           </div>
 
@@ -42,6 +49,7 @@ class CreateData extends Component {
               id="content"
               className="materialize-textarea"
               onChange={this.handleChange}
+              value={this.state.content}
             />
             <label htmlFor="content">Content</label>
           </div>
@@ -49,7 +57,6 @@ class CreateData extends Component {
             <button className="btn pink lighten-1">Create</button>
           </div>
         </form>
-        <p>teamss: {team.teamName}</p>
       </div>
     );
   }

@@ -1,3 +1,23 @@
+export const deleteData = (id, task) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+
+    firestore
+      .collection('teams')
+      .doc('LFC')
+
+      .update({
+        tasks: firestore.FieldValue.arrayRemove(task)
+      })
+      .then(() => {
+        dispatch({ type: 'DELETE_DATA', task });
+      })
+      .catch(err => {
+        dispatch({ type: 'DELETE_DATA_ERROR', err });
+      });
+  };
+};
+
 export const createData = item => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     // store database in firestore
@@ -11,14 +31,15 @@ export const createData = item => {
     firestore
       .collection('teams')
       .doc(item.team)
-      .collection('tasks')
-      .add({
+      .update({
         // use data from parameter item (where title is from createData component)
-        ...item,
-        authorFirstName: profile.firstName,
-        authorLastName: profile.lastName,
-        authorID: authorId,
-        createdAt: new Date()
+        tasks: firestore.FieldValue.arrayUnion({
+          ...item,
+          authorFirstName: profile.firstName,
+          authorLastName: profile.lastName,
+          authorID: authorId,
+          createdAt: new Date()
+        })
       })
       .then(() => {
         dispatch({ type: 'CREATE_DATA', item });

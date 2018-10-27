@@ -1,20 +1,38 @@
 import React from 'react';
-import DataSummary from './DataSummary';
-import { Link } from 'react-router-dom';
+import TaskSummary from '../tasks/TaskSummary';
+import { deleteData } from '../../store/actions/dataActions';
+import { connect } from 'react-redux';
 
-const DataList = ({ data }) => {
+const DataList = ({ data, onDelete }) => {
+  var teamdata = data.tasks;
+
   return (
     <div className="data-list section">
-      {data &&
-        data.map(item => {
+      {teamdata &&
+        teamdata.map((task, index) => {
           return (
-            <Link to={'/data/' + item.id} key={item.id}>
-              <DataSummary item={item} />
-            </Link>
+            <TaskSummary
+              task={task}
+              onDelete={onDelete}
+              key={index}
+              index={index}
+            />
           );
         })}
     </div>
   );
 };
 
-export default DataList;
+const mapDispatchToProps = dispatch => {
+  return {
+    onDelete: (id, task) => {
+      dispatch(deleteData(id, task));
+      console.log(deleteData(id, task));
+    }
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(DataList);

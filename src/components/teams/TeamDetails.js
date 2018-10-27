@@ -10,6 +10,9 @@ const TeamDetails = props => {
   const { team, auth, data } = props;
   if (!auth.uid) return <Redirect to="/signin" />;
 
+  console.log(props);
+  console.log(props.match.params.id);
+
   if (team) {
     return (
       <div className="container section team-details">
@@ -45,13 +48,19 @@ const mapStateToProps = (state, ownProps) => {
   return {
     // return it in object team. Now available in props.team
     team: team,
-    auth: state.firebase.auth
-    /* data: team.tasks */
+    auth: state.firebase.auth,
+    data: team
+    // working on getting data just for this team showing
+    /* data: state.firestore.ordered.teams */
   };
 };
 
 export default compose(
   connect(mapStateToProps),
   // give page access to database state
-  firestoreConnect([{ collection: 'teams' }])
+  firestoreConnect([
+    {
+      collection: 'teams'
+    }
+  ])
 )(TeamDetails);
