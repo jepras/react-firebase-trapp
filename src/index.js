@@ -16,13 +16,15 @@ const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+
     reduxFirestore(fbConfig),
     // make use of attachAuthIsReady to render on time - sync firestore profile with user from colleciton users
     reactReduxFirebase(fbConfig, {
       useFirestoreForProfile: true,
       userProfile: 'users',
       attachAuthIsReady: true
-    })
+    }),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
   )
 );
 

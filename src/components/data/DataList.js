@@ -3,13 +3,12 @@ import TaskSummary from '../tasks/TaskSummary';
 import { deleteData } from '../../store/actions/dataActions';
 import { connect } from 'react-redux';
 
-const DataList = ({ data, onDelete }) => {
-  var teamdata = data.tasks;
-
+const DataList = ({ tasks, onDelete }) => {
+  console.log(tasks);
   return (
     <div className="data-list section">
-      {teamdata &&
-        teamdata.map((task, index) => {
+      {tasks &&
+        tasks.map((task, index) => {
           return (
             <TaskSummary
               task={task}

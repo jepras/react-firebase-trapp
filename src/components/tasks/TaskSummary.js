@@ -1,18 +1,14 @@
 import React from 'react';
 import moment from 'moment';
 
-const TaskSummary = ({
-  task: { title, authorFirstName, authorLastName },
-  onDelete,
-  index,
-  task
-}) => {
+const TaskSummary = ({ onDelete, index, task }) => {
   return (
     <div className="card z-depth-0 data-summary">
       <div className="card-content grey-text text-darken-3">
-        <span className="card-title ">{title}</span>
+        <span className="card-title ">{task.title}</span>
         <p>
-          {index} - Posted by {authorFirstName} {authorLastName}
+          {task.content} - Posted by {task.authorFirstName}{' '}
+          {task.authorLastName}
         </p>
         <p className="grey-text">
           {moment(task.createdAt.toDate()).calendar()}

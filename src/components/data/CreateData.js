@@ -24,7 +24,7 @@ class CreateData extends Component {
     });
   };
   render() {
-    const { auth, team } = this.props;
+    const { auth } = this.props;
     if (!auth.uid) return <Redirect to="/signin" />;
 
     console.log(this.props);

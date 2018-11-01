@@ -3,12 +3,9 @@ export const deleteData = (id, task) => {
     const firestore = getFirestore();
 
     firestore
-      .collection('teams')
-      .doc('LFC')
-
-      .update({
-        tasks: firestore.FieldValue.arrayRemove(task)
-      })
+      .collection('tasks')
+      .doc(task.title)
+      .delete()
       .then(() => {
         dispatch({ type: 'DELETE_DATA', task });
       })
@@ -22,6 +19,8 @@ export const createData = item => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     // store database in firestore
     const firestore = getFirestore();
+
+    // redux state
     // getState gives us state object where we can fetch
     const profile = getState().firebase.profile;
     // get id attached to user profile -- IMPORTANT
@@ -29,17 +28,15 @@ export const createData = item => {
 
     // get collection
     firestore
-      .collection('teams')
-      .doc(item.team)
-      .update({
+      .collection('tasks')
+      .doc(item.title)
+      .set({
         // use data from parameter item (where title is from createData component)
-        tasks: firestore.FieldValue.arrayUnion({
-          ...item,
-          authorFirstName: profile.firstName,
-          authorLastName: profile.lastName,
-          authorID: authorId,
-          createdAt: new Date()
-        })
+        ...item,
+        authorFirstName: profile.firstName,
+        authorLastName: profile.lastName,
+        authorID: authorId,
+        createdAt: new Date()
       })
       .then(() => {
         dispatch({ type: 'CREATE_DATA', item });
