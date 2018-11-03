@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Dashboard from './components/dashboard/Dashboard';
-import DataDetails from './components/data/DataDetails';
 import TeamDetails from './components/teams/TeamDetails';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
@@ -16,7 +15,6 @@ class App extends Component {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Dashboard} />
-            <Route path="/data/:id" component={DataDetails} />
             <Route path="/teams/:id" component={TeamDetails} />
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />

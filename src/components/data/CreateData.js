@@ -30,34 +30,36 @@ class CreateData extends Component {
     console.log(this.props);
 
     return (
-      <div className="container">
-        <form className="white" onSubmit={this.handleSubmit}>
-          <h5 className="grey-text text-darken-3">Create some data</h5>
+      <form
+        className="card white row add-data no-margin valign-wrapper"
+        onSubmit={this.handleSubmit}
+      >
+        <div className="col input-field five">
+          <i className="material-icons">add</i>
+        </div>
+        <div className="input-field col s5">
+          <input
+            type="text"
+            id="title"
+            onChange={this.handleChange}
+            value={this.state.title}
+          />
+          <label htmlFor="title">Title</label>
+        </div>
 
-          <div className="input-field">
-            <input
-              type="text"
-              id="title"
-              onChange={this.handleChange}
-              value={this.state.title}
-            />
-            <label htmlFor="title">Title</label>
-          </div>
-
-          <div className="input-field">
-            <textarea
-              id="content"
-              className="materialize-textarea"
-              onChange={this.handleChange}
-              value={this.state.content}
-            />
-            <label htmlFor="content">Content</label>
-          </div>
-          <div className="input-field">
-            <button className="btn pink lighten-1">Create</button>
-          </div>
-        </form>
-      </div>
+        <div className="input-field col s5">
+          <input
+            id="content"
+            type="text"
+            onChange={this.handleChange}
+            value={this.state.content}
+          />
+          <label htmlFor="content">Content</label>
+        </div>
+        <div className="input-field col s2">
+          <button className="btn pink lighten-1">Create</button>
+        </div>
+      </form>
     );
   }
 }

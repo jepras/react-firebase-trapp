@@ -3,20 +3,22 @@ import TaskSummary from '../tasks/TaskSummary';
 import { deleteData } from '../../store/actions/dataActions';
 import { connect } from 'react-redux';
 
-const DataList = ({ tasks, onDelete }) => {
+const DataList = ({ tasks, onDelete, team }) => {
   console.log(tasks);
   return (
-    <div className="data-list section">
+    <div className="data-list">
       {tasks &&
         tasks.map((task, index) => {
-          return (
-            <TaskSummary
-              task={task}
-              onDelete={onDelete}
-              key={index}
-              index={index}
-            />
-          );
+          if (task.team === team.teamName) {
+            return (
+              <TaskSummary
+                task={task}
+                onDelete={onDelete}
+                key={index}
+                index={index}
+              />
+            );
+          }
         })}
     </div>
   );

@@ -3,23 +3,24 @@ import moment from 'moment';
 
 const TaskSummary = ({ onDelete, index, task }) => {
   return (
-    <div className="card z-depth-0 data-summary">
-      <div className="card-content grey-text text-darken-3">
-        <span className="card-title ">{task.title}</span>
+    <div className="card row data-summary valign-wrapper no-margin">
+      <div className="col s7 z-depth-1">
         <p>
-          {task.content} - Posted by {task.authorFirstName}{' '}
-          {task.authorLastName}
+          {task.title}: {task.content}
         </p>
+      </div>
+      <div className="col s4">
         <p className="grey-text">
-          {moment(task.createdAt.toDate()).calendar()}
+          {task.authorFirstName} -{moment(task.createdAt.toDate()).calendar()}
         </p>
-        <button
-          className="btn"
-          type="button"
+      </div>
+      <div className="col s1">
+        <a
+          className="btn-small button-padding waves-effect"
           onClick={() => onDelete(index, task)}
         >
-          delete
-        </button>
+          <i class="material-icons">delete</i>
+        </a>
       </div>
     </div>
   );

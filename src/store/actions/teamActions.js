@@ -28,3 +28,25 @@ export const createTeam = team => {
       });
   };
 };
+
+export const addMember = item => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    // store database in firestore
+    const firestore = getFirestore();
+
+    // get collection
+    firestore
+      .collection('teams')
+      .doc(item.team)
+      .update({
+        // use data from parameter team (where title is from createTeam component)
+        members: firestore.FieldValue.arrayUnion(item.mail)
+      })
+      .then(() => {
+        dispatch({ type: 'ADD_MEMBER', item });
+      })
+      .catch(err => {
+        dispatch({ type: 'ADD_MEMBER_ERROR', err });
+      });
+  };
+};
