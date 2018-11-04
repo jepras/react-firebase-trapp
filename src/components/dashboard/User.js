@@ -1,27 +1,23 @@
 import React, { Component } from 'react';
 import TeamList from '../teams/TeamList';
-import CreateTeam from '../teams/CreateTeam';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
 
-class Dashboard extends Component {
+class User extends Component {
   render() {
     // takes data & auth from props
     const { auth, teams, profile } = this.props;
     if (!auth.uid) return <Redirect to="/signin" />;
 
+    console.log(this.props);
+
     return (
-      <div className="dashboard container">
+      <div className="container">
         <div className="row">
           <div className="col s12">
             <TeamList teams={teams} profile={profile} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col s12">
-            <CreateTeam />
           </div>
         </div>
       </div>
@@ -45,4 +41,4 @@ export default compose(
     // which collection to connect to?
     { collection: 'teams', orderedBy: ['createdAt', 'desc'] }
   ])
-)(Dashboard);
+)(User);

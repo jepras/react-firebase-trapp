@@ -6,6 +6,7 @@ import TeamDetails from './components/teams/TeamDetails';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import CreateTeam from './components/teams/CreateTeam';
+import User from './components/dashboard/User';
 
 class App extends Component {
   render() {
@@ -18,7 +19,7 @@ class App extends Component {
             <Route path="/teams/:id" component={TeamDetails} />
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />
-            <Route path="/createteam" component={CreateTeam} />
+            <Route path="/user" component={User} />
           </Switch>
         </div>
       </BrowserRouter>

@@ -9,10 +9,10 @@ const SignedInLinks = props => {
     <div>
       <ul className="right">
         <li>
-          <NavLink to="/teams">Teams</NavLink>
+          <NavLink to="/">Manager view</NavLink>
         </li>
         <li>
-          <NavLink to="/createteam">New Team</NavLink>
+          <NavLink to="/user">User logging</NavLink>
         </li>
         <li>
           <NavLink to="#" onClick={props.signOut}>

@@ -7,32 +7,31 @@ import CreateData from '../data/CreateData';
 import TeamMembers from './TeamMembers';
 import AddMember from './AddMember';
 import DataList from '../data/DataList';
-import { NavLink } from 'react-router-dom';
 
 const TeamDetails = props => {
-  const { team, auth, tasks } = props;
+  const { team, auth, tasks, profile } = props;
   if (!auth.uid) return <Redirect to="/signin" />;
 
-  console.log(props);
-
   if (team) {
+    const teamMembers = team.members;
+
     return (
       <div className="container section white team-details">
         <nav className="card z-depth-5">
           <div className="nav-wrapper grey darken-3 center-align">
             <span className="card-title">{team.teamName}</span>
           </div>
-          <div class="nav-content grey darken-3 center-align">
-            <ul class="tabs tabs-transparent center">
-              <li class="tab">
+          <div className="nav-content grey darken-3 center-align">
+            <ul className="tabs tabs-transparent center">
+              <li className="tab">
                 <a href="#test1">Last Week</a>
               </li>
-              <li class="tab">
-                <a class="active" href="#test2">
+              <li className="tab">
+                <a className="active" href="#test2">
                   This Week
                 </a>
               </li>
-              <li class="tab">
+              <li className="tab">
                 <a href="#test4">Next Week</a>
               </li>
             </ul>
@@ -47,9 +46,13 @@ const TeamDetails = props => {
           <CreateData team={team} />
         </div>
         <div className="card section">
-          <h5 className="grey-text text-darken-3 space">Add Member</h5>
-          {/* <TeamMembers team={team} /> */}
-          <AddMember team={team} />
+          <h5 className="grey-text text-darken-3 space">People</h5>
+          <TeamMembers teamMembers={teamMembers} team={team} />
+
+          {/* Only show if owner (not complete) */}
+          {profile.firstName === team.teamOwnerFirstName && (
+            <AddMember team={team} />
+          )}
         </div>
       </div>
     );
@@ -64,6 +67,7 @@ const TeamDetails = props => {
 
 const mapStateToProps = (state, ownProps) => {
   const id = ownProps.match.params.id;
+
   const teams = state.firestore.data.teams;
   const tasks = state.firestore.ordered.tasks;
   // check if we have any teams in data, if so, look for the one with the id in const above.
@@ -72,7 +76,8 @@ const mapStateToProps = (state, ownProps) => {
     // return it in object team. Now available in props.team
     team: team,
     auth: state.firebase.auth,
-    tasks: tasks
+    tasks: tasks,
+    profile: state.firebase.profile
   };
 };
 

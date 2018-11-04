@@ -1,20 +1,38 @@
 import React from 'react';
-import TeamSummary from './TeamSummary';
-import { Link } from 'react-router-dom';
+import { deleteMember } from '../../store/actions/teamActions';
+import Member from './Member';
+import { connect } from 'react-redux';
 
-const TeamMembers = ({ teams }) => {
+const TeamMembers = ({ teamMembers, onDelete, team }) => {
+  console.log(team.teamName);
   return (
     <div className="teams-list section">
-      {teams &&
-        teams.map(team => {
+      {teamMembers &&
+        teamMembers.map((member, index) => {
           return (
-            <Link to={'/teams/' + team.id} key={team.id}>
-              <TeamSummary team={team} />
-            </Link>
+            <Member
+              member={member}
+              onDelete={onDelete}
+              key={index}
+              index={index}
+              team={team}
+            />
           );
         })}
     </div>
   );
 };
 
-export default TeamMembers;
+const mapDispatchToProps = dispatch => {
+  return {
+    onDelete: (id, member, team) => {
+      dispatch(deleteMember(id, member, team));
+      console.log(deleteMember(id, member, team));
+    }
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(TeamMembers);

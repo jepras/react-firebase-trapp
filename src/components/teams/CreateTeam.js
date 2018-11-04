@@ -18,15 +18,15 @@ class CreateTeam extends Component {
     e.preventDefault();
     // calls mapDispatchToProp function
     this.props.createTeam(this.state);
-    // access to browser history through props
-    this.props.history.push('/');
+    // access to browser history through props -- NEED HELP
+    /* this.props.history.push('/'); */
   };
   render() {
     const { auth } = this.props;
     if (!auth.uid) return <Redirect to="/signin" />;
 
     return (
-      <div className="container">
+      <div>
         <form className="white" onSubmit={this.handleSubmit}>
           <h5 className="grey-text text-darken-3">Create a new team</h5>
           <div className="input-field">

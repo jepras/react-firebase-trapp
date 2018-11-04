@@ -18,7 +18,7 @@ export const createTeam = team => {
         teamOwnerLastName: profile.lastName,
         teamOwnerID: teamOwnerId,
         createdAt: new Date(),
-        members: []
+        members: [profile.mail]
       })
       .then(() => {
         dispatch({ type: 'CREATE_TEAM', team });
@@ -47,6 +47,25 @@ export const addMember = item => {
       })
       .catch(err => {
         dispatch({ type: 'ADD_MEMBER_ERROR', err });
+      });
+  };
+};
+
+export const deleteMember = (id, member, team) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+
+    firestore
+      .collection('teams')
+      .doc(team.teamName)
+      .update({
+        members: firestore.FieldValue.arrayRemove(member)
+      })
+      .then(() => {
+        dispatch({ type: 'DELETE_MEMBER', member });
+      })
+      .catch(err => {
+        dispatch({ type: 'DELETE_MEMBER_ERROR', err });
       });
   };
 };
