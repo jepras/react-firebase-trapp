@@ -2,14 +2,18 @@ import React from 'react';
 import TaskSummary from '../tasks/TaskSummary';
 import { deleteData } from '../../store/actions/dataActions';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
-const DataList = ({ tasks, onDelete, team }) => {
-  console.log(tasks);
+const DataList = ({ tasks, onDelete, team, week }) => {
+  console.log(week);
   return (
     <div className="data-list">
       {tasks &&
         tasks.map((task, index) => {
-          if (task.team === team.teamName) {
+          if (
+            task.team === team.teamName &&
+            moment(task.createdAt.toDate()).format('w') === week
+          ) {
             return (
               <TaskSummary
                 task={task}

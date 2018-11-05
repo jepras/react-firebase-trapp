@@ -27,8 +27,6 @@ class CreateData extends Component {
     const { auth } = this.props;
     if (!auth.uid) return <Redirect to="/signin" />;
 
-    console.log(this.props);
-
     return (
       <form
         className="card white row add-data no-margin valign-wrapper"

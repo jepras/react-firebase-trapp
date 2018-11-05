@@ -4,12 +4,14 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
 import CreateData from '../data/CreateData';
+import TeamNav from '../layout/TeamNav';
 import TeamMembers from './TeamMembers';
 import AddMember from './AddMember';
 import DataList from '../data/DataList';
+import moment from 'moment';
 
 const TeamDetails = props => {
-  const { team, auth, tasks, profile } = props;
+  const { team, auth, tasks, profile, week } = props;
   if (!auth.uid) return <Redirect to="/signin" />;
 
   if (team) {
@@ -17,32 +19,13 @@ const TeamDetails = props => {
 
     return (
       <div className="container section white team-details">
-        <nav className="card z-depth-5">
-          <div className="nav-wrapper grey darken-3 center-align">
-            <span className="card-title">{team.teamName}</span>
-          </div>
-          <div className="nav-content grey darken-3 center-align">
-            <ul className="tabs tabs-transparent center">
-              <li className="tab">
-                <a href="#test1">Last Week</a>
-              </li>
-              <li className="tab">
-                <a className="active" href="#test2">
-                  This Week
-                </a>
-              </li>
-              <li className="tab">
-                <a href="#test4">Next Week</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <TeamNav team={team} />
         <br />
 
         <div className="card section">
           <span className="card-title space">Tasks</span>
 
-          <DataList tasks={tasks} team={team} />
+          <DataList tasks={tasks} team={team} week={week} />
           <CreateData team={team} />
         </div>
         <div className="card section">
@@ -67,6 +50,7 @@ const TeamDetails = props => {
 
 const mapStateToProps = (state, ownProps) => {
   const id = ownProps.match.params.id;
+  const week = ownProps.match.params.week;
 
   const teams = state.firestore.data.teams;
   const tasks = state.firestore.ordered.tasks;
@@ -77,7 +61,8 @@ const mapStateToProps = (state, ownProps) => {
     team: team,
     auth: state.firebase.auth,
     tasks: tasks,
-    profile: state.firebase.profile
+    profile: state.firebase.profile,
+    week: week
   };
 };
 

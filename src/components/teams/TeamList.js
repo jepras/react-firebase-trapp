@@ -1,15 +1,16 @@
 import React from 'react';
 import TeamSummary from './TeamSummary';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 const TeamList = ({ teams, profile }) => {
+  const thisWeek = moment().format('w');
   return (
     <div className="teams-list section">
       {teams &&
         teams.map(team => {
-          console.log(team);
           return (
-            <Link to={'/teams/' + team.id} key={team.id}>
+            <Link to={'/teams/' + team.id + '/' + thisWeek} key={team.id}>
               <TeamSummary team={team} profile={profile} />
             </Link>
           );

@@ -11,7 +11,7 @@ const TaskSummary = ({ onDelete, index, task }) => {
       </div>
       <div className="col s4">
         <p className="grey-text">
-          {task.authorFirstName} -{moment(task.createdAt.toDate()).calendar()}
+          {task.authorFirstName} - {moment(task.createdAt.toDate()).calendar()}
         </p>
       </div>
       <div className="col s1">

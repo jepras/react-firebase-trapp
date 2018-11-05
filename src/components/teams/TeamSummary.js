@@ -2,6 +2,8 @@ import React from 'react';
 
 const TeamSummary = ({ team, profile }) => {
   // only show teams where user is a member
+  console.log(team.members);
+  console.log(profile.mail);
   if (team.members.includes(profile.mail)) {
     return (
       <div className="card z-depth-0 data-summary">

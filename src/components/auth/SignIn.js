@@ -8,16 +8,19 @@ class SignIn extends Component {
     email: '',
     password: ''
   };
+
   handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value
     });
   };
+
   handleSubmit = e => {
     e.preventDefault();
     // calls signIn mapped to props & takes email/password from state.
     this.props.signIn(this.state);
   };
+
   render() {
     const { authError, auth } = this.props;
     if (auth.uid) return <Redirect to="/" />;

@@ -25,8 +25,6 @@ class AddMember extends Component {
     const { auth } = this.props;
     if (!auth.uid) return <Redirect to="/signin" />;
 
-    console.log(this.props);
-
     return (
       <div className="section">
         <form

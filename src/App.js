@@ -5,7 +5,6 @@ import Dashboard from './components/dashboard/Dashboard';
 import TeamDetails from './components/teams/TeamDetails';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
-import CreateTeam from './components/teams/CreateTeam';
 import User from './components/dashboard/User';
 
 class App extends Component {
@@ -16,7 +15,7 @@ class App extends Component {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Dashboard} />
-            <Route path="/teams/:id" component={TeamDetails} />
+            <Route path="/teams/:id/:week" component={TeamDetails} />
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />
             <Route path="/user" component={User} />

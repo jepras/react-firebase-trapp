@@ -4,7 +4,6 @@ import Member from './Member';
 import { connect } from 'react-redux';
 
 const TeamMembers = ({ teamMembers, onDelete, team }) => {
-  console.log(team.teamName);
   return (
     <div className="teams-list section">
       {teamMembers &&
