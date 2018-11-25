@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { signUp } from '../../store/actions/authActions';
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { signUp } from "../../store/actions/authActions";
 
 class SignUp extends Component {
   state = {
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: ''
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: ""
   };
   handleChange = e => {
     this.setState({
