@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import TeamList from '../teams/TeamList';
-import CreateTeam from '../teams/CreateTeam';
-import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
-import { Redirect } from 'react-router-dom';
+import React, { Component } from "react";
+import TeamList from "../teams/TeamList";
+import CreateTeam from "../teams/CreateTeam";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
+import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
   render() {
     // takes data & auth from props
     const { auth, teams, profile } = this.props;
-    if (!auth.uid) return <Redirect to="/signin" />;
-
+    /*     if (!auth.uid) return <Redirect to="/getin" />;
+     */
     return (
       <div className="dashboard container">
         <div className="row">
@@ -43,6 +43,6 @@ export default compose(
   // connects collection to to firestore to be used as state on site
   firestoreConnect([
     // which collection to connect to?
-    { collection: 'teams', orderedBy: ['createdAt', 'desc'] }
+    { collection: "teams", orderedBy: ["createdAt", "desc"] }
   ])
 )(Dashboard);

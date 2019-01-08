@@ -1,4 +1,6 @@
 import React from "react";
+import ReactDOM from "react-dom";
+import Button from "@material-ui/core/Button";
 
 const Hero = () => (
   <section className="hero">
@@ -6,6 +8,9 @@ const Hero = () => (
       <div className="hero-inner">
         <div className="hero-copy">
           <h1 className="hero-title mt-0">Automated Team Reporting</h1>
+          <Button variant="contained" color="primary">
+            Hello World
+          </Button>
           <p className="hero-paragraph">
             Our app makes daily logging and team reporting based on these a
             matter of seconds instead of hours
